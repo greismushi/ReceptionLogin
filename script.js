@@ -1,23 +1,27 @@
-const loginForm = document.getElementById('loginForm');
-const errorMsg = document.getElementById('errorMsg');
-
-// Hardcoded login credentials
-const receptionCredentials = {
-    username: "Reception",
-    password: "1234"
-};
-
-loginForm.addEventListener('submit', function(e) {
-    e.preventDefault(); // prevent page refresh
+// ------------------- LOGIN -------------------
+document.getElementById('loginForm').addEventListener('submit', function(e){
+    e.preventDefault(); // prevent page reload
 
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
+    const message = document.getElementById('message');
 
-    if(username === receptionCredentials.username && password === receptionCredentials.password) {
-        alert("Login successful!");
-        // Redirect to another page if needed
-        // window.location.href = "dashboard.html";
+    // Only Reception can log in
+    if(username === "Reception" && password === "1234"){
+        message.style.color = "green";
+        message.textContent = "Login Successful!";
+        // Redirect to dashboard
+        setTimeout(() => {
+            window.location.href = "dashboard.html";
+        }, 1000);
     } else {
-        errorMsg.textContent = "Invalid username or password";
+        message.style.color = "red";
+        message.textContent = "Incorrect username or password!";
     }
+});
+
+// ------------------- REGISTER BUTTON -------------------
+document.getElementById('registerBtn').addEventListener('click', function(){
+    // Redirect to registration page
+    window.location.href = "register.html";
 });
